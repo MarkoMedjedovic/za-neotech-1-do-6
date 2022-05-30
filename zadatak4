@@ -46,14 +46,14 @@ $result2 = implode(', ',$result);
 <!DOCTYPE html>
 <html lang="sr" dir="ltr" > 
 
-<h>Date Format Transformer</h2>
+<h2>Date Format Transformer</h2>
 
 <form action=? method=POST> 
 <input type=text name=dvalue size=55>
 <input type=submit value=Submit>
-<br><span>Test primer unosa: 2010/02/20  19/12/2016  11-18-2012 (ceo izraz) </span>
+<br><span>Test primer unosa: 2010/02/20  19/12/2016  11-18-2012 (uneti ceo izraz) </span>
 
-<br>
+<br><br>
 Rezultat: <?php echo $result2?>
 <br>
 

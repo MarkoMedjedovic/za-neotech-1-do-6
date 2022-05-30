@@ -1,0 +1,65 @@
+<?php
+///STRANICA: DATE FORMAT TRANSFORMER
+
+function transformDateFormatSINGLE($orgDate){
+	$newDate = null;
+
+	$mask1 = "/(\d{4})\/(\d{2})\/(\d{2})/i";
+	$mask2 = "/(\d{2})\/(\d{2})\/(\d{4})/i";
+	$mask3 = "/(\d{2})-(\d{2})-(\d{4})/i";
+	
+	if((boolean)preg_match($mask1, $orgDate)){
+		$newDate = date("Ymd", strtotime($orgDate));
+	}
+	else if((boolean)preg_match($mask2, $orgDate)){
+		list($d,$m,$y)=explode('/',$orgDate);
+		$orgDate = "{$y}/{$m}/{$d}";
+		$newDate = date("Ymd", strtotime($orgDate));
+	}	
+	else if((boolean)preg_match($mask3, $orgDate)){
+		list($m,$d,$y)=explode('-',$orgDate);
+		$orgDate = "{$y}/{$m}/{$d}";
+		$newDate = date("Ymd", strtotime($orgDate));
+	}	
+    return $newDate;  
+}
+
+function transformDateFormat($orgDatess){
+	$orgDatess = trim($orgDatess);
+	$orgDatess = str_replace('  ', ' ', $orgDatess);
+	$orgDatess = str_replace('  ', ' ', $orgDatess);
+	$datesArr = explode(' ',$orgDatess);
+	$datesReturnArr = [];
+	for($i = 0;$i < count($datesArr); $i++){
+		$returnVal = transformDateFormatSINGLE($datesArr[$i]);
+		if($returnVal!=null){
+			$datesReturnArr[] = $returnVal;
+		}
+	}
+	return $datesReturnArr;
+}	
+
+$result = transformDateFormat($_POST['dvalue']);
+$result2 = implode(', ',$result);
+
+?> 
+<!DOCTYPE html>
+<html lang="sr" dir="ltr" > 
+
+<h>Date Format Transformer</h2>
+
+<form action=? method=POST> 
+<input type=text name=dvalue size=55>
+<input type=submit value=Submit>
+<br><span>Test primer unosa: 2010/02/20  19/12/2016  11-18-2012 (ceo izraz) </span>
+
+<br>
+Rezultat: <?php echo $result2?>
+<br>
+
+</form>
+
+<body>
+</body>
+
+</html>

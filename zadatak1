@@ -5,7 +5,7 @@
 Ova funkcija se lako može proširiti tako da prihvati i sva internacionalna tj. ne-engleska slova.
 To se lako postiže putem funkcije mb_strlen(). 
 Naime ako strlen($char)!=mb_strlen($char), tada znamo da se radi o ne-englskom slovu.
-Po mom iskustvu ne postoji bolje rešenje uključujući i regex.
+Po mom iskustvu ne postoji bolje rešenje, uključujući i regex.
 */
 
 function validateUsername($str) {

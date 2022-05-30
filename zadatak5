@@ -1,0 +1,62 @@
+<?php
+///STRANICA: PACKAGES CALCULATOR
+function calcPackages( $itemscount, $bigcratesMAX, $smallcratesMAX){
+	$itemscount = (int)$itemscount;
+	$bigcratesMAX = (int)$bigcratesMAX;
+	$smallcratesMAX = (int)$smallcratesMAX;
+	$bigcratescount = 0;
+	$smallcratescount = 0;
+	if($itemscount>0){
+		if($itemscount>=5){
+			$bigcratescount = (int)($itemscount/5);
+			$smallcratescount = $itemscount%5;
+		}
+		else{
+			$smallcratescount = $itemscount;
+		}
+		if($bigcratescount>$bigcratesMAX){ 
+			$smallcratescount += ($bigcratescount - $bigcratesMAX) * 5;
+			$bigcratescount = $bigcratesMAX;
+		}
+	  echo  $itemscount.','.$bigcratescount.','.$smallcratescount;
+		if($smallcratescount>$smallcratesMAX){
+			return -1;
+		}
+		else{
+			return $smallcratescount + $bigcratescount;
+		}
+	}
+
+	return -1;
+}
+
+$result = calcPackages( $_POST['itemscount'] , $_POST['bigcratesMAX'] , $_POST['smallcratesMAX'] );
+
+?> 
+<!DOCTYPE html>
+<html lang="sr" dir="ltr" > 
+
+<h2>Calculate required number of packages</h2>
+<br>
+<form action=? method=POST> 
+Items available:<br>
+<input type=text name=itemscount placeholder=0>
+<br>
+Big crates available:<br>
+<input type=text name=bigcratesMAX placeholder=0>
+<br>
+Small crates available:<br>
+<input type=text name=smallcratesMAX placeholder=0>
+<br><br>
+<input type=submit value=Submit>
+<br>
+<br>
+Sum packages required: <?php echo $result?>
+<br>
+
+</form>
+
+<body>
+</body>
+
+</html>

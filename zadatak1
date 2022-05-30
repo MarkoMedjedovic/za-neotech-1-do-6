@@ -1,1 +1,32 @@
-test1
+<?php
+///STRANICA: username validation
+
+function validateUsername($str) {
+  $allowed = array("_");
+  if( ctype_alnum( str_replace($allowed, '', $str ) ) && !is_numeric(substr($str,0,1)) && substr($str,0,1)!="_" 
+  && substr($str,-1)!="_" && substr_count($str,'_')<2 && strlen($str)>3 ) {
+    return 'Valid';
+  }
+  return 'Not valid';
+}
+
+$validation_result = validateUsername($_POST['username']);
+
+?> 
+<!DOCTYPE html>
+<html lang="sr" dir="ltr" > 
+
+<h2>Username Validation</h2>
+
+<form action=? method=POST> 
+<input type=text name=username>
+<br>
+Validation result: <?php echo $validation_result?>
+<br>
+<input type=submit value=Submit>
+</form>
+
+<body>
+</body>
+
+</html>

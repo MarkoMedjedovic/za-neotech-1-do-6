@@ -1,0 +1,3 @@
+
+//RESENJE TRECEG ZADATKA:
+update menu set price=price*1.1 where category = 'Soups' ||  category = 'Salads'

@@ -1,6 +1,13 @@
 <?php
 ///STRANICA: username validation
 
+/*  *** NAPOMENA: ***
+Ova funkcija se lako može proširiti tako da prihvati i sva internacionalna tj. ne-engleska slova.
+To se lako može dodati puten funkcije mb_strlen(). 
+Naime ako strlen($char)!=mb_strlen($char), tada znamo da se radi o ne-englskom slovu.
+Po mom iskustvu ne postoji bolje rešenje uključujući i regex.
+*/
+
 function validateUsername($str) {
   $allowed = array("_");
   if( ctype_alnum( str_replace($allowed, '', $str ) ) && !is_numeric(substr($str,0,1)) && substr($str,0,1)!="_" 

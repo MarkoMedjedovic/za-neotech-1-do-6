@@ -1,0 +1,103 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.10.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: May 30, 2022 at 01:00 PM
+-- Server version: 5.7.23
+-- PHP Version: 5.6.36-1+ubuntu14.04.1+deb.sury.org+1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `z_neotech_test`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ingredients`
+--
+
+CREATE TABLE IF NOT EXISTS `ingredients` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `recipeId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `recipeId` (`recipeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ingredients`
+--
+
+INSERT INTO `ingredients` (`id`, `name`, `recipeId`) VALUES
+(1, 'sastojak1', 2),
+(2, 'sastojak2', 1),
+(3, 'tuna', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu`
+--
+
+CREATE TABLE IF NOT EXISTS `menu` (
+  `itemName` varchar(50) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `price` decimal(5,2) DEFAULT NULL,
+  PRIMARY KEY (`itemName`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menu`
+--
+
+INSERT INTO `menu` (`itemName`, `category`, `price`) VALUES
+('item1', 'Soups', '110.00'),
+('item2', 'Salads', '220.00'),
+('item3', 'Deserts', '50.00'),
+('item4', 'Salads', '135.52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipes`
+--
+
+CREATE TABLE IF NOT EXISTS `recipes` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `cost` decimal(5,2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `recipes`
+--
+
+INSERT INTO `recipes` (`id`, `name`, `cost`) VALUES
+(1, 'recept1', '107.00'),
+(2, 'recept2', '79.00'),
+(3, 'recept3', '87.00');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `ingredients`
+--
+ALTER TABLE `ingredients`
+  ADD CONSTRAINT `ingredients_ibfk_1` FOREIGN KEY (`recipeId`) REFERENCES `recipes` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,0 +1,59 @@
+<?php
+///STRANICA: JSON VIEW-COUNT
+$jsonExampleString = '
+{
+	"apiVersion": "2.1",
+	"videos": [
+		{
+			"id": "253",
+			"category": "Music",
+			"title": "Jingle Bells",
+			"duration": 457,
+			"viewCount": 88270796
+		}
+	]
+}';
+
+
+$jsonExampleString222 = '
+{
+	"apiVersion": "2.1",
+	"videos": [
+		{
+			"id": "253",
+			"category": "Music",
+			"title": "Jingle Bells",
+			"duration": 457,
+			"viewCount": 1125788
+		}
+	]
+}';
+
+$inputsArr = [$jsonExampleString, $jsonExampleString222];
+
+$output = '0';
+$cntAll = 0;
+for($i = 0;$i < count($inputsArr); $i++){
+	$json = json_decode($inputsArr[$i]);
+	if(is_object($json)){
+		$cnt =  (int)($json->videos[0]->viewCount);
+		$cntAll+=$cnt;
+		$output .= " + {$cnt}";
+	}
+}
+$output .= " = {$cntAll} ";
+
+?> 
+<!DOCTYPE html>
+ 
+<h2>JSON View-Count:</h2>
+
+<?php 
+
+echo "<h3>Input:</h3><code>";
+print_r($inputsArr);
+echo "</code>";
+ 
+echo "<br><h3>Result:</h3>".$output;
+
+?> 

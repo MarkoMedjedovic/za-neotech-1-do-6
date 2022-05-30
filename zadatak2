@@ -1,0 +1,2 @@
+ //RESENJE DRUGOG ZADATKA:
+ update recipes set cost=cost+2 where id in (select recipeId from ingredients where name = 'tuna')
